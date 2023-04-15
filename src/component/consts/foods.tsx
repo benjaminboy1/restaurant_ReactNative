@@ -18,6 +18,7 @@ const foods = [
     price: '6.30', 
     image: require('../../images/burger.jpeg'),
     },
+    
     {id: '4', 
     name: 'Mt Pizza', 
     ingredients: 'Mixed Piza', 

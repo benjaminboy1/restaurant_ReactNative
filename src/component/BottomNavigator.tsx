@@ -4,10 +4,10 @@ import React from 'react'
 import {createBottomTabNavigator}  from '@react-navigation/bottom-tabs'
 import { FontAwesome } from '@expo/vector-icons';
 
-import HomeScreen from '../component/HomeScreen';
-import CardScreen from '../component/CardScreen';
-import MarketScreen from '../component/MarketScreen';
-import SearchScreen from '../component/SearchScreen';
+import HomeScreen from './HomeScreen';
+import CardScreen from './CardScreen';
+import MarketScreen from './MarketScreen';
+import SearchScreen from './SearchScreen';
 import HeartScreen from './HeartScreen';
 import COLORS from './consts/colors';
 
@@ -68,14 +68,14 @@ const BottomNavigation = () => {
          name="search"  component={SearchScreen} />
 
 <Tab.Screen options={{
-          tabBarIcon: ({color}) => (<FontAwesome name="shopping-cart" size={28} color={color} />),
+          tabBarIcon: ({color}) => (<FontAwesome name="heart" size={28} color={color} />),
         }}
          name="heart"  component={HeartScreen} />
 
 
 
 <Tab.Screen options={{
-          tabBarIcon: ({color}) => (<FontAwesome name="heart" size={28} color={color} />),
+          tabBarIcon: ({color}) => (<FontAwesome name="shopping-cart" size={28} color={color} />),
         }}
          name="card"  component={CardScreen} />
 

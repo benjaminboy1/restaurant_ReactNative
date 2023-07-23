@@ -26,7 +26,7 @@ const OnboardScreen = ({navigation}) => {
       <View style={styles.indicator}/>
     </View>
     
-    <PrimaryButton  onPress={() => navigation.navigate('Home')} title="Get Started" />
+    <PrimaryButton  onPress={() => navigation.navigate('HomeScreen')} title="Get Started" />
    </View>
     </SafeAreaView>
     

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, FlatList, Dimensions, } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, FlatList, Dimensions, TouchableHighlight, } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FontAwesome } from '@expo/vector-icons';
@@ -6,20 +6,21 @@ import COLORS from './consts/colors'
 import Categories from './consts/Categories';
 import foods from './consts/foods';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import DetailsScreen from './DetailsScreen';
+import SearchScreen from './SearchScreen';
 
 const {width} = Dimensions.get("screen");
-const cardWidth = width/2 - 20;
+const cardWidth = width/ 2 - 20;
 
 
-
-
-const Home = () => {
+const HomeScreen = ({navigation}) => {
 
 
 const [selectedCategoryIndex, setSelectedCategoryInedx] = React.useState(0);
 
-const ListCategories = () =>{
-  return(
+
+const ListCategories = () => {
+  return (
     <ScrollView 
     horizontal
     showsHorizontalScrollIndicator={false}
@@ -45,15 +46,29 @@ const ListCategories = () =>{
 };
 
 const Card = ({food}) => {
-  return <View style={styles.card}>
+  return ( 
+  <TouchableHighlight underlayColor={COLORS.white} activeOpacity={0.9} onPress={() =>navigation.navigate('DetailsScreen', food)}>
+    <View style={styles.card}>
     <View style={{alignItems:'center', top:-10}}>
-      <Image source={food.image} style={{width:120, height:120, }}/>
+      <Image source={food.image} style={{width:120, height:120, borderTopRightRadius:20, borderTopLeftRadius:20,}}/>
     </View>
-  </View>;
+    <View style={{marginHorizontal:20}}>
+      <Text style={{alignSelf:'center', fontWeight:'bold', fontSize:18, color:COLORS.dark}}>{food.name}</Text>
+      <Text style={{fontWeight:'bold', marginTop:2, fontSize:14, color:COLORS.grey}}>{food.ingredients}</Text>
+    </View>
+    <View style={{marginTop:10, marginHorizontal:20, flexDirection:'row', justifyContent:'space-between'}}>
+      <Text style={{fontSize:18, fontWeight:'bold'}}>${food.price}</Text>
+      <View style={styles.addToCardbtn}>
+      <FontAwesome name="plus"  size={20} color={COLORS.white}/>
+      </View>
+    </View>
+  </View>
+  </TouchableHighlight>
+  
+  );
+   
  };
  
-
-
   return (
     <SafeAreaView>
       <View style={styles.header}>
@@ -66,12 +81,13 @@ const Card = ({food}) => {
       </View>
       <Image style={{width:50, height:50, borderRadius:30}} source={require('../images/chris.jpg')}/>
     </View>
-    <View style={{marginTop:40, flexDirection:'row', paddingHorizontal: 20, }}>
+    <View style={{marginTop:30, flexDirection:'row', paddingHorizontal: 20, }} >
       <View style={styles.inputContainer}>
-      <FontAwesome name="search" size={28}  color={COLORS.dark}/>
-      <TextInput style={{flex:1, fontSize:18, left:10,}} placeholder={'Search for Food'}/>
+      <FontAwesome name="search" size={28}  color={COLORS.dark} onTouchStart={()=>navigation.navigate('SearchScreen')}/>
+      
+      <TextInput style={{flex:1, fontSize:18, left:10,}} placeholder={'Search for Food'} onPressIn={()=>navigation.navigate('SearchScreen')} />
       </View>
-      <View style={styles.sortBtn}>
+      <View style={styles.sortBtn} onTouchStart={()=>navigation.navigate('SearchScreen')}>
       <FontAwesome name="clock-o" size={24} color={COLORS.white} />
       </View>
     </View>
@@ -90,7 +106,7 @@ const Card = ({food}) => {
 }
 const styles = StyleSheet.create({
   header:{
-    marginTop: 20,
+    marginTop: -30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal:20,
@@ -145,8 +161,20 @@ const styles = StyleSheet.create({
    borderRadius: 15,
    elevation: 13,
    backgroundColor: COLORS.white,
-  }
+  },
+  addToCardbtn:{
+    height:25,
+    width:25,
+    borderRadius:20,
+    backgroundColor:COLORS.primary,
+    textAlign:'center',
+    justifyContent:'center',
+    alignItems:'center',
+    
+    
+    
+  },
 
 })
 
-export default Home
+export default HomeScreen;

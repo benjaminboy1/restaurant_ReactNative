@@ -9,7 +9,6 @@ import HomeScreen from './HomeScreen'
 
 const DetailsScreen = ({navigation, route}) => {
   const item= route.params;
-  
 
   return (
     <SafeAreaView style={{backgroundColor:COLORS.white}}>
@@ -75,4 +74,4 @@ const styles = StyleSheet.create({
     fontSize:15,
   }
 })
-export default DetailsScreen
+export default DetailsScreen;

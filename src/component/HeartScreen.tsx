@@ -9,4 +9,4 @@ const HeartScreen = () => {
   )
 }
 
-export default HeartScreen
+export default HeartScreen;
